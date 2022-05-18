@@ -1,0 +1,86 @@
+..\obj\main.o: main.c
+..\obj\main.o: ..\SYSTEM\sys\sys.h
+..\obj\main.o: ..\USER\stm32f4xx.h
+..\obj\main.o: ..\CORE\core_cm4.h
+..\obj\main.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\main.o: ..\CORE\core_cmInstr.h
+..\obj\main.o: ..\CORE\core_cmFunc.h
+..\obj\main.o: ..\CORE\core_cm4_simd.h
+..\obj\main.o: ..\USER\system_stm32f4xx.h
+..\obj\main.o: ..\USER\stm32f4xx_conf.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_adc.h
+..\obj\main.o: ..\USER\stm32f4xx.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_crc.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_dbgmcu.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_dma.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_exti.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_flash.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_gpio.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_i2c.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_iwdg.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_pwr.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_rcc.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_rtc.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_sdio.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_spi.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_syscfg.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_tim.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_usart.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_wwdg.h
+..\obj\main.o: ..\FWLIB\inc\misc.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_cryp.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_hash.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_rng.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_can.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_dac.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
+..\obj\main.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
+..\obj\main.o: ..\SYSTEM\delay\delay.h
+..\obj\main.o: ..\SYSTEM\usart\usart.h
+..\obj\main.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\main.o: ..\HARDWARE\LED\led.h
+..\obj\main.o: ..\HARDWARE\KEY\key.h
+..\obj\main.o: ..\HARDWARE\LCD\lcd.h
+..\obj\main.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\main.o: image.h
+..\obj\main.o: ..\HARDWARE\TIMER\timer.h
+..\obj\main.o: ..\HARDWARE\OV2640\ov2640.h
+..\obj\main.o: ..\HARDWARE\OV2640\sccb.h
+..\obj\main.o: ..\HARDWARE\DCMI\dcmi.h
+..\obj\main.o: ..\nnom_inc\nnom.h
+..\obj\main.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\main.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+..\obj\main.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+..\obj\main.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+..\obj\main.o: ..\nnom_inc\nnom_port.h
+..\obj\main.o: ..\nnom_inc\nnom_tensor.h
+..\obj\main.o: ..\nnom_inc\nnom.h
+..\obj\main.o: ..\nnom_inc\nnom_layers.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_activation.h
+..\obj\main.o: ..\nnom_inc\nnom_layers.h
+..\obj\main.o: ..\nnom_inc\nnom_local.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_concat.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_conv2d.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_cropping.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_zero_padding.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_conv2d_trans.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_dense.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_dw_conv2d.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_flatten.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_reshape.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_global_pool.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_maxpool.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_input.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_lambda.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_matrix.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_avgpool.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_output.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_rnn.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_softmax.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_sumpool.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_upsample.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_simple_cell.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_lstm_cell.h
+..\obj\main.o: ..\nnom_inc\layers/nnom_gru_cell.h
+..\obj\main.o: ..\nnom_inc\nnom_utils.h
+..\obj\main.o: ..\nnom_inc\incep_weights.h

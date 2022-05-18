@@ -1,0 +1,98 @@
+一、图片预处理
+1、图片的由来
+手机拍摄的图片，用画图软件，将分辨率截成224*224大小。
+用图片取模软件，将图片取模，取模方式，16位真彩色。
+生成一个h文件，用一维数组保存像素数据，在程序里调用这个h文件里的一维数组。
+2、图片显示
+gImage_C：h文件中一维数组名称，
+Showimage_16(0,0,(u8 *)gImage_C);
+//获取图片像素尺寸
+	Wide = pdata[3] << 8;		
+	Wide += pdata[2];			
+	
+	Height = pdata[5] << 8;		
+	Height += pdata[4];			
+//显示图片
+	for(i=0;i<Wide*Height;i++)
+	{
+			picL=*(u_pdata+i*2);
+			picH=*(u_pdata+i*2+1);
+			data=picH<<8|picL;
+			LCD_Fast_DrawPoint(i%Wide,(int)(i/(Wide)),data);		
+	}
+两个8位数，是一个像素点的值，一个像素点的值是16位，需要两个8位数拼凑。
+
+//图片预处理
+uint8_t static_buf[1024*49];//224*224 保存预处理后的图片像素消息，这个时候，一个像素点，用一个8位表示。
+
+	for(i=0;i<Wide*Height;i++)
+	{
+		picL=*(u_pdata+i*2);	
+		picH=*(u_pdata+i*2+1);
+		data=picH<<8|picL;
+ 		//提取像素点消息中的RGB，
+		R = data & 0xF800; //5
+		G = data & 0x07E0;//6
+		B = data & 0x001F;//5
+		//图片背景偏灰，不能完全用RBG三通道的值来做分割，只取RB通道的值
+		val=R+B;       //+G;
+	                data=data&0xF81F;//完全的RGB，之后缺少G通道，只有0x0000，不受影响，就是黑色
+		if(val >max)
+			max=val;
+		if(val<min)
+			min=val;
+		if(val>=10)
+			static_buf[i]=0xff; //黄色背景
+		else
+			static_buf[i]=0x00;//黑色背景
+		LCD_Fast_DrawPoint(i%Wide,(int)(i/(Wide)),data);		
+	}
+
+//将预处理的图片显示一下，二值化结束，背景颜色是黄色，0xff<<8=0xff00
+	for(i=0;i<Wide*Height;i++)
+	{
+			LCD_Fast_DrawPoint(i%Wide,(int)(i/(Wide)),static_buf[i]<<8);		
+	}
+
+二、图片压缩
+uint8_t getimage[28*28]; //保存压缩后的数据
+
+resize(224,224,28,28);
+224=28*8
+28是送到网络的图片尺寸，224是原始图片尺寸，压缩的思路是，取每8*8大小像素消息，压缩成一个像素消息。
+
+//28*28块，每一块有8*8个像素，判断每一块有多少个0xff，白色背景，如果白色背景数量大于20，认定对应的像素点是白色，否者就是黑色。
+	for(k=0;k<28*28;k++)
+	{
+		num=0;
+		for(m=0;m<8;m++)
+		{
+			for(n=0;n<8;n++)
+			{
+				max=64*(int)(k/28)*28+(k-(int)(k/28)*28)*8+m*224+n;
+				if(static_buf[max]==0xff)
+					num++;
+			}
+		}
+		if(num > max)
+			max=num;
+		if(num>=max_val)
+		{
+			getimage[k]=0; //背景
+			LCD_Fast_DrawPoint(k%Out_Wide+20,(int)(k/(Out_Wide))+260,YELLOW);
+		}
+		else
+		{
+			getimage[k]=127;//黑色像素，最好是127，训练的数据集里，像素值大部分是127
+			LCD_Fast_DrawPoint(k%Out_Wide+20,(int)(k/(Out_Wide))+260,BLACK);	
+		}
+	}
+
+三、送到网络预测
+将压缩的放到nnom_input_data中，然后model_run(model)预测，
+	for (uint16_t i = 0; i < 784; i++)
+	{
+		nnom_input_data[i] = getimage[i];
+	}
+
+四、

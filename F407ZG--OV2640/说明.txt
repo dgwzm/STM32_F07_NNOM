@@ -1,0 +1,32 @@
+1、将摄像头数据保存到数组的逻辑
+1）将摄像头模式调整为RGB565模式，摄像头的输出数据就是RGB数据格式，每个像素点是16位。
+2）设置摄像头输出数据尺寸大小，224*224
+3）设置LCD显示图像的范围，224*224
+4）设置DCMI通道，将摄像头的数据传递给数组， 
+DCMI_DMA_Init((u32)&jpeg_buf, jpeg_buf_size, DMA_MemoryDataSize_HalfWord, DMA_MemoryInc_Enable); 
+5）设置接收中断数据中断，每接收一帧数据，就回中断一次，就回调用jpeg_data_process->DCMI_Stop，停止DCMI传输，为数据显示预留出CPU空间。设置标志位，jpeg_data_ok=1，表示可以显示图像了，等处理完图像，再启动DCMI_Start，采集下一帧数据。
+
+2、图像分割 
+1) 用B通道二值化，因为数字是黑色，背景是灰白色，就B通道的区别较大
+
+3、图像显示
+LCD_Set_Window(0,0,224,320);
+LCD_SetCursor(0,0);  
+LCD_WriteRAM_Prepare();	
+for(i=0;i<224*224;i++)
+      LCD->LCD_RAM=jpeg_buf[i];
+
+显示图片的时候，没有设置像素点坐位，像素点坐标是自动递增的，递增范围是用LCD_Set_Window(0,0,224,320);设置
+LCD_SetCursor(0,0); 设置递增起始坐标
+
+3、压缩 resize
+4、神经网络预测，操作流程
+每次采集都会二值化和resize，只是选择看那个图片。
+KEY0_PRES：显示原始图片
+KEY1_PRES：显示黑白分割后的
+WKUP_PRES：对当前帧图片进行预测，显示预测结果
+
+5、结束部分
+重新启动DCMI，采集下一帧图片
+
+显示图片，和预测的时候，是没有摄像头采集的
